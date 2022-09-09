@@ -17,10 +17,16 @@ static const char col_gray2[]       = "#51a626";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#f7944d";
+static const unsigned int baralpha  = 215;
+static const unsigned int borderalpha = 215;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+};
+static const unsigned int alphas[][3] = {
+	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -68,11 +74,19 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { TERM, NULL };
 static const char *file[]     = {"pcmanfm", NULL };
+static const char *upvol[]   = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
+static const char *downvol[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
+static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL };//ukro od Mentaloutlaw 
 
 #include "shiftview.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"xfce4-screenshooter", NULL} } },
+	{ MODKEY,                       XK_c,      spawn,          {.v = (const char*[]){"archlinux-logout", NULL } } },
+	{ 0,                            XK_F3,     spawn,          {.v = upvol   } },
+   	{ 0,                            XK_F2,     spawn,          {.v = downvol } },
+    	{ 0,                            XK_F1,     spawn,          {.v = mutevol } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = file } },           
 	{ MODKEY,                       XK_w,      spawn,          {.v = (const char*[]){BROWSER, NULL } } },
 	{ ControlMask|Mod1Mask,         XK_t,      spawn,          {.v = (const char*[]){ALTTERM, NULL } } },
