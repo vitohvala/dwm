@@ -17,8 +17,8 @@ static const char col_gray2[]       = "#51a626";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#f7944d";
-static const unsigned int baralpha  = 215;
-static const unsigned int borderalpha = 215;
+static const unsigned int baralpha  = 204;
+static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
@@ -82,6 +82,11 @@ static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"./bright.sh", "+5", NULL } } },
+	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"./bright.sh", "-5", NULL } } },
+	{ MODKEY,                       XK_a,      spawn,          {.v = (const char*[]){"st", "-e", "ani-cli", NULL } } }, //weeb
+	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
+	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
 	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"xfce4-screenshooter", NULL} } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = (const char*[]){"archlinux-logout", NULL } } },
 	{ 0,                            XK_F3,     spawn,          {.v = upvol   } },
