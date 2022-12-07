@@ -1,5 +1,5 @@
 #define TERM "st"
-#define ALTTERM "urxvt"
+#define ALTTERM "alacritty"
 #define BROWSER "librewolf"
 #define ALTBROWSER "firefox"
 /* See LICENSE file for copyright and license details. */
@@ -11,7 +11,9 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "fontawesome:size=11", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };
+static const char *fonts[]          = { "monospace:size=10", 
+										"Hack Nerd Font:pixelsize=17:antialias=true:autohint=true"
+};
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#51a626";
@@ -85,8 +87,8 @@ static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"bright", "+5", NULL } } },
-	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"bright", "-5", NULL } } },
+	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"bright.sh", "+", NULL } } },
+	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"bright.sh", "-", NULL } } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = (const char*[]){"st", "-e", "ani-cli", NULL } } }, //weeb
 	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
