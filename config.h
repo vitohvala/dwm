@@ -1,8 +1,9 @@
+/* See LICENSE file for copyright and license details. */
+
 #define TERM "st"
 #define ALTTERM "alacritty"
 #define BROWSER "librewolf"
 #define ALTBROWSER "firefox"
-/* See LICENSE file for copyright and license details. */
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -16,10 +17,10 @@ static const char *fonts[]          = { "monospace:size=10",
 };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#51a626";
+static const char col_gray2[]       = "#83a598";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#ffffff";
-static const char col_cyan[]        = "#f7944d";
+static const char col_cyan[]        = "#cc241d";
 static const unsigned int baralpha  = 204;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
@@ -92,11 +93,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_a,      spawn,          {.v = (const char*[]){"st", "-e", "ani-cli", NULL } } }, //weeb
 	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
-	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"scrshot", NULL} } },
+	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"skrin", NULL} } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = (const char*[]){"archlinux-logout", NULL } } },
 	{ 0,                            XK_F3,     spawn,          {.v = upvol   } },
    	{ 0,                            XK_F2,     spawn,          {.v = downvol } },
-    	{ 0,                            XK_F1,     spawn,          {.v = mutevol } },
+    { 0,                            XK_F1,     spawn,          {.v = mutevol } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = file } },           
 	{ MODKEY,                       XK_w,      spawn,          {.v = (const char*[]){BROWSER, NULL } } },
 	{ ControlMask|Mod1Mask,         XK_t,      spawn,          {.v = (const char*[]){ALTTERM, NULL } } },
