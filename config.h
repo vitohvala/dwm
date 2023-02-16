@@ -7,21 +7,20 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 7, .gappx = 7 };
+static const Gap default_gap        = {.isgap = 1, .realgap = 8, .gappx = 8 };
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10", 
-										"Hack Nerd Font:pixelsize=17:antialias=true:autohint=true"
-};
+										"Hack Nerd Font:pixelsize=17:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#83a598";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#cc241d";
-static const unsigned int baralpha  = 204;
+static const unsigned int baralpha  = 205;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -35,6 +34,7 @@ static const unsigned int alphas[][3] = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+/* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -44,7 +44,7 @@ static const Rule rules[] = {
 	/* class        instance    title         tags mask     isfloating  isterminal   noswallow  monitor */
 	{ "Gimp",        NULL,       NULL,          0,            1,          	0,          0,       -1 },
 	{ "Firefox",     NULL,       NULL,          1 << 8,       0,           	0, 	   -1,       -1 },
-	{ "st-256color", NULL,       NULL,          0,            0,            1,          0,       -1 },
+	{ "st",          NULL,       NULL,          0,            0,            1,          0,       -1 },
 	{  NULL,         NULL,      "Event Tester", 0,            0,            0,          1,       -1 },      
 };
 
@@ -54,6 +54,8 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 #include "fibonacci.c"
+#include "layouts.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -63,6 +65,7 @@ static const Layout layouts[] = {
 	{ ">M>",      centeredfloatingmaster },
 	{ "[@]",      spiral },
 	{ "[\\]",     dwindle },
+    { "HHH",      grid },
 };
 
 /* key definitions */
@@ -85,6 +88,7 @@ static const char *downvol[] = { "amixer", "-q", "set", "Master", "5%-", "unmute
 static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL };//ukro od Mentaloutlaw 
 
 #include "shiftview.c"
+#include "selfrestart.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -94,7 +98,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
 	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"skrin", NULL} } },
-	{ MODKEY,                       XK_c,      spawn,          {.v = (const char*[]){"archlinux-logout", NULL } } },
+    { MODKEY,                       XK_c,      self_restart,   {0} },
+    { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = (const char*[]){"log-out-testv0" } } },
 	{ 0,                            XK_F3,     spawn,          {.v = upvol   } },
    	{ 0,                            XK_F2,     spawn,          {.v = downvol } },
     { 0,                            XK_F1,     spawn,          {.v = mutevol } },
@@ -121,6 +126,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[6]} },
+    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[7]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_z,      shiftview,      {.i = -1 } },
