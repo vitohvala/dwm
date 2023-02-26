@@ -7,7 +7,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 8, .gappx = 8 };
+static const Gap default_gap        = {.isgap = 2, .realgap = 8, .gappx = 8 };
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;
 static const int showbar            = 1;        /* 0 means no bar */
@@ -28,13 +28,18 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 static const unsigned int alphas[][3] = {
+	/*               fg         bg         border   */
 	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
+/*i thought this was cool lol
+ * static const char *tags[] = { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }; */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-/* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
+/*
+ * alt 
+ * static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -43,7 +48,7 @@ static const Rule rules[] = {
 	 */
 	/* class        instance    title         tags mask     isfloating  isterminal   noswallow  monitor */
 	{ "Gimp",        NULL,       NULL,          0,            1,          	0,          0,       -1 },
-	{ "Firefox",     NULL,       NULL,          1 << 8,       0,           	0, 	   -1,       -1 },
+	{ "Firefox",     NULL,       NULL,          1 << 8,       0,           	0, 	        -1,       -1 },
 	{ "st",          NULL,       NULL,          0,            0,            1,          0,       -1 },
 	{  NULL,         NULL,      "Event Tester", 0,            0,            0,          1,       -1 },      
 };
@@ -53,6 +58,7 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+
 #include "fibonacci.c"
 #include "layouts.c"
 
@@ -88,18 +94,19 @@ static const char *downvol[] = { "amixer", "-q", "set", "Master", "5%-", "unmute
 static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL };//ukro od Mentaloutlaw 
 
 #include "shiftview.c"
+#include "exitdwm.c"
 #include "selfrestart.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"bright.sh", "+", NULL } } },
-	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"bright.sh", "-", NULL } } },
+	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){ "brightc", "+", NULL } } },
+	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){ "brightc", "-", NULL } } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = (const char*[]){"st", "-e", "ani-cli", NULL } } }, //weeb
 	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
 	{ 0,                            XK_Print,  spawn,          {.v = (const char*[]){"skrin", NULL} } },
     { MODKEY,                       XK_c,      self_restart,   {0} },
-    { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = (const char*[]){"log-out-testv0" } } },
+    { MODKEY|ShiftMask,             XK_c,      exitdwm,        {0} },
 	{ 0,                            XK_F3,     spawn,          {.v = upvol   } },
    	{ 0,                            XK_F2,     spawn,          {.v = downvol } },
     { 0,                            XK_F1,     spawn,          {.v = mutevol } },
