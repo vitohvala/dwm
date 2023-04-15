@@ -58,8 +58,8 @@ void exitdwm (){
        if (strcmp (exit_action, S_LOCK) == 0) system ("zakljucaj.sh");
        else if (strcmp (exit_action, S_OFFSCREEN) == 0) system ("sleep .5; xset dpms force off");
        else if (strcmp (exit_action, S_EXIT) == 0) quit (& (const Arg) {0});
-       else if (strcmp (exit_action, S_REBOOT) == 0) system ("reboot");
-       else if (strcmp (exit_action, S_SHUTDOWN) == 0) system ("shutdown -P now");
+       else if (strcmp (exit_action, S_REBOOT) == 0) system ("sudo reboot");
+       else if (strcmp (exit_action, S_SHUTDOWN) == 0) system ("sudo openrc-shutdown -p now");
 
 close_streams:
        pclose (exit_menu);
