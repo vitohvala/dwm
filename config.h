@@ -99,8 +99,8 @@ static const char *mutevol[] = { "amixer", "-q", "set", "Master", "toggle", NULL
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"sudo", "brightc", "+", NULL } } },
-	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"sudo", "brightc", "-", NULL } } },
+	{ 0,                            XK_F6,     spawn,          {.v = (const char*[]){"brightc", "+", NULL } } },
+	{ 0,                            XK_F5,     spawn,          {.v = (const char*[]){"brightc", "-", NULL } } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = (const char*[]){"st", "-e", "ani-cli", NULL } } }, //weeb
 	{ MODKEY,                       XK_s,      spawn,          {.v = (const char*[]){ "stremio", NULL } } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = (const char*[]){TERM, "-e", "htop", NULL } } },
